@@ -1,0 +1,2013 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Каталог - SWEET WORLD</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Montserrat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* --- КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ #1: УНИВЕРСАЛЬНЫЙ BOX-SIZING и СКРОЛЛ --- */
+      * {
+        box-sizing: border-box;
+      }
+
+      :root {
+        --color-main-pink: #ff69b4; /* Яркий розовый */
+        --color-main-blue: #00bfff; /* Глубокий голубой */
+        --color-main-yellow: #ffdd00; /* Солнечный желтый */
+        --color-text-dark: #4b0082; /* Индиго для текста */
+        --color-text-light: #fff;
+        --color-accent: #ff4500; /* Оранжево-красный акцент */
+        /* ИСПРАВЛЕНИЕ ДЛЯ iOS: Добавлен системный стек для надежности */
+        --font-header: "Montserrat", "Fredoka One", "Comic Sans MS",
+          "Apple Chancery", cursive;
+        --font-body: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, "Helvetica Neue", Arial, sans-serif;
+      }
+
+      html {
+        width: 100%;
+        overflow-x: hidden;
+      }
+
+      body {
+        font-family: var(--font-body);
+        margin: 0;
+        color: var(--color-text-dark);
+        background-color: var(--color-main-pink);
+        position: relative;
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          var(--color-main-yellow) 0%,
+          var(--color-main-pink) 50%,
+          var(--color-main-blue) 100%
+        );
+        z-index: -1;
+        background-size: 400% 400%;
+        animation: gradient-animation 20s ease infinite;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ctext x='10' y='20' font-family='Arial' font-size='15'%3E%F0%9F%8D%AD%3C/text%3E%3Ctext x='70' y='50' font-family='Arial' font-size='15'%3E%E2%AD%90%EF%B8%8F%3C/text%3E%3Ctext x='30' y='80' font-family='Arial' font-size='15'%3E%F0%9F%8D%AC%3C/text%3E%3Ctext x='90' y='10' font-family='Arial' font-size='15'%3E%E2%AD%90%EF%B8%8F%3C/text%3E%3Ctext x='50' y='40' font-family='Arial' font-size='15'%3E%F0%9F%8D%AB%3C/text%3E%3C/g%3E%3C/svg%3E");
+        animation: confetti-animation 60s linear infinite;
+        z-index: -1;
+      }
+
+      @keyframes gradient-animation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes confetti-animation {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 500px 500px;
+        }
+      }
+
+      /* --- Стили для шапки сайта --- */
+      .header {
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 20px 50px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .header a {
+        text-decoration: none;
+        color: var(--color-text-dark);
+        transition: transform 0.2s ease-in-out;
+      }
+
+      .header a:hover {
+        transform: scale(1.05);
+      }
+
+      .header-brand h1 {
+        font-family: var(--font-header);
+        font-weight: 700;
+        margin: 0;
+        font-size: 48px;
+        color: var(--color-main-pink);
+        text-shadow: 2px 2px 0px var(--color-text-dark);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .brand-link {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .brand-logo {
+        height: 60px;
+        width: auto;
+        transition: transform 0.2s ease-in-out;
+      }
+
+      .brand-link:hover .brand-logo {
+        transform: scale(1.05);
+      }
+
+      .header-brand h1 {
+        font-size: 40px;
+      }
+
+      /* ИСПРАВЛЕНИЕ ДЛЯ ПК: Явно скрываем все мобильные элементы по умолчанию (для ПК) */
+      .hamburger-menu,
+      .mobile-menu,
+      .menu-overlay {
+        display: none;
+      }
+      /* КОНЕЦ ИСПРАВЛЕНИЯ */
+
+      .nav-menu ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-menu a {
+        font-weight: 600;
+        font-size: 18px;
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      .nav-menu a::after {
+        content: "🍬";
+        position: absolute;
+        left: 50%;
+        bottom: -15px;
+        transform: translateX(-50%) scale(0);
+        transition: transform 0.3s ease-in-out;
+        font-size: 20px;
+      }
+
+      .nav-menu a:hover {
+        color: var(--color-accent);
+      }
+
+      .nav-menu a:hover::after {
+        transform: translateX(-50%) scale(1);
+      }
+
+      /* Стили для выпадающего меню */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #fef4f4;
+        min-width: 180px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 2px solid var(--color-main-pink);
+        top: calc(100% + 15px); /* Отступ от пункта меню */
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .dropdown-content a {
+        color: var(--color-text-dark);
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        font-weight: 500;
+        transition: background-color 0.2s ease-in-out;
+      }
+
+      .dropdown-content a:hover {
+        background-color: var(--color-main-yellow);
+        transform: none;
+      }
+
+      /* Отображение выпадающего меню при наведении */
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      /* --- Стили для каталога --- */
+      .catalog-section {
+        padding: 80px 30px;
+        text-align: center;
+        max-width: 1300px;
+        margin: 40px auto;
+      }
+
+      .catalog-section h2 {
+        font-family: var(--font-header);
+        font-size: 60px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
+        line-height: 1.2;
+        color: var(--color-text-dark);
+      }
+
+      .catalog-intro {
+        max-width: 700px;
+        margin: 0 auto 20px;
+        text-align: center;
+        font-size: 18px;
+        color: var(--color-text-dark);
+      }
+
+      .catalog-controls {
+        display: flex;
+        justify-content: flex-end;
+        max-width: 1400px;
+        margin: 0 auto 30px;
+        gap: 20px;
+        align-items: center;
+        padding: 0 20px;
+      }
+
+      .catalog-controls label {
+        font-weight: 700;
+        margin-right: 10px;
+        color: var(--color-text-dark);
+      }
+
+      .catalog-controls select {
+        padding: 8px 12px;
+        border-radius: 15px;
+        border: 1px solid var(--color-main-pink);
+        background-color: rgba(255, 255, 255, 0.9);
+        cursor: pointer;
+        font-family: var(--font-body);
+        color: var(--color-text-dark);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+        justify-content: center;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .product-card {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        border: 2px solid transparent;
+        /* ИЗМЕНЕНИЕ ДЛЯ ПК: Дополнительный отступ сверху, чтобы опустить содержимое */
+        padding-top: 35px;
+      }
+
+      .product-card:hover {
+        transform: translateY(-15px) scale(1.03);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        border-color: var(--color-main-pink);
+      }
+
+      .product-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background-color: var(--color-main-blue);
+        color: #fff;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: bold;
+        z-index: 10; /* Бейдж всегда выше */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .product-badge.top-seller {
+        background-color: var(--color-accent);
+      }
+
+      .product-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: contain;
+        display: block;
+        transition: transform 0.3s ease;
+        z-index: 5; /* Изображение ниже бейджа */
+      }
+
+      .product-card:hover img {
+        transform: scale(1.05);
+      }
+
+      .product-card h3,
+      .product-card .product-name {
+        /* Добавляем p.product-name */
+        font-family: var(--font-header);
+        font-size: 24px;
+        margin: 20px 0 10px;
+        color: var(--color-text-dark);
+        line-height: 1.3;
+        min-height: 64px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+      }
+
+      .product-footer {
+        margin-top: auto;
+      }
+
+      .product-card .stock-info {
+        font-size: 14px;
+        color: #666;
+        margin-top: 5px;
+      }
+
+      .product-card .stock-info .stock-quantity {
+        font-weight: 600;
+        color: var(--color-main-pink);
+      }
+
+      .product-card .grams {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 15px;
+      }
+
+      .product-card .buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+      }
+
+      .product-card .product-price {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--color-main-blue);
+        margin-bottom: 0;
+        margin-right: 15px;
+      }
+
+      .product-card .product-price .price {
+        font-size: 26px;
+      }
+
+      .product-card button {
+        border: none;
+        padding: 12px 25px;
+        font-family: var(--font-body);
+        font-weight: 700;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-card button svg {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        fill: currentColor;
+      }
+
+      .product-card .button-buy {
+        background-color: var(--color-main-pink);
+        color: var(--color-text-light);
+      }
+
+      .product-card .button-buy:hover {
+        transform: scale(1.1);
+        background-color: var(--color-accent);
+      }
+
+      /* --- Стили для блока контактов --- */
+      .contacts-section {
+        padding: 60px 30px;
+        background-color: rgba(255, 255, 255, 0.9);
+        margin: 40px auto;
+        border-radius: 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        max-width: 1250px;
+        width: calc(100% - 60px);
+      }
+
+      .contacts-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .contacts-title {
+        font-family: var(--font-header);
+        font-size: 36px;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 30px;
+        padding-top: 0;
+        color: var(--color-text-dark);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .contacts-left {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+      }
+
+      .contact-link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: var(--color-text-dark);
+        font-weight: 600;
+        font-size: 18px;
+        transition: all 0.3s ease;
+      }
+
+      .contact-link:hover {
+        color: var(--color-main-pink);
+        transform: translateX(5px);
+      }
+
+      .contact-link svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .contacts-right {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .contact-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .contact-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .contact-button.telegram {
+        background-color: #0088cc;
+      }
+
+      .contact-button.whatsapp {
+        background-color: #25d366;
+      }
+
+      .contact-button svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      /* --- Адаптация контактов для мобильных --- */
+      @media (max-width: 768px) {
+        .contacts-section {
+          padding: 40px 20px;
+          width: calc(100% - 40px);
+          margin: 20px auto;
+        }
+
+        .contacts-container {
+          flex-direction: column;
+          gap: 30px;
+          text-align: center;
+        }
+
+        .contacts-left {
+          align-items: center;
+        }
+
+        .contact-link {
+          justify-content: center;
+        }
+
+        .contacts-right {
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .contacts-section {
+          padding: 30px 15px;
+          width: calc(100% - 30px);
+        }
+
+        .contacts-right {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .contact-button {
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .contacts-title {
+          font-size: 28px;
+        }
+      }
+
+      /* --- Стили для кнопки корзины (остаются без изменений) --- */
+      #cart-button {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: var(--color-main-pink);
+        color: #fff;
+        border: 4px solid var(--color-accent);
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        z-index: 999;
+      }
+
+      #cart-button:hover {
+        transform: scale(1.1) rotate(10deg);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      }
+
+      #cart-button svg {
+        width: 35px;
+        height: 35px;
+      }
+
+      #cart-counter {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background-color: var(--color-accent);
+        color: #fff;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        font-weight: bold;
+        animation: pulse 1.5s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(255, 69, 0, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 69, 0, 0);
+        }
+      }
+
+      /* --- Адаптация для экранов до 768px (ПЛАНШЕТЫ И ТЕЛЕФОНЫ) --- */
+      @media (max-width: 768px) {
+        .header {
+          padding: 15px 20px;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .header-brand h1 {
+          font-size: 24px;
+          text-align: left;
+        }
+
+        .brand-logo {
+          height: 40px;
+        }
+
+        .brand-link {
+          gap: 10px;
+        }
+
+        /* Скрываем обычное меню на мобильных */
+        .nav-menu {
+          display: none;
+        }
+
+        /* Отображаем гамбургер */
+        .hamburger-menu {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          width: 30px;
+          height: 25px;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          padding: 0;
+          margin: 0;
+          margin-left: auto;
+        }
+
+        .hamburger-line {
+          width: 100%;
+          height: 3px;
+          background-color: var(--color-text-dark);
+          border-radius: 2px;
+          transition: all 0.3s ease;
+        }
+
+        /* ИЗМЕНЕНИЯ ДЛЯ ПРОПОРЦИЙ КАРТОЧЕК */
+        .catalog-section {
+          padding: 40px 10px; /* Уменьшаем горизонтальный отступ раздела */
+        }
+
+        .product-grid {
+          /* minmax(160px, 1fr) гарантирует лучшую ширину и 2-3 товара */
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+          gap: 15px; /* Уменьшаем отступ между карточками */
+        }
+
+        .product-card {
+          padding: 10px; /* Уменьшаем внутренний отступ карточки */
+          /* ИЗМЕНЕНИЕ ДЛЯ МОБИЛЬНОЙ ВЕРСИИ: Дополнительный отступ сверху */
+          padding-top: 30px;
+        }
+
+        /* ИЗМЕНЕНИЕ: Отступ для бейджей, чтобы они не накладывались на изображение,
+        которое было опущено вниз через padding-top родителя */
+        .product-badge {
+          top: 5px;
+          left: 5px;
+          padding: 5px 10px;
+        }
+
+        .product-card h3 {
+          font-size: 18px; /* Немного уменьшим шрифт */
+          min-height: 46px; /* Чуть меньше высоты для 2 строк */
+          margin: 10px 0 5px;
+        }
+
+        .product-card img {
+          height: 130px; /* Уменьшаем высоту изображения для лучшей пропорции */
+        }
+
+        .catalog-section h2 {
+          font-size: 40px;
+        }
+
+        .catalog-controls {
+          padding: 0 10px;
+          justify-content: center;
+        }
+
+        .product-card .product-price .price {
+          font-size: 22px;
+        }
+
+        /* --- СТИЛИ ДЛЯ МОБИЛЬНОГО МЕНЮ (transform) --- */
+        .mobile-menu {
+          position: fixed;
+          top: 0;
+          right: 0;
+          width: 80%;
+          height: 100vh;
+          background-color: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(10px);
+          z-index: 2000;
+          padding: 80px 30px 30px;
+          box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+          display: block;
+          overflow-y: auto;
+          overflow-x: hidden;
+
+          /* Сдвигаем на 100% его ширины за пределы экрана */
+          transform: translateX(100%);
+          transition: transform 0.3s ease-in-out;
+        }
+
+        .mobile-menu.active {
+          transform: translateX(0); /* Возвращаем на место */
+        }
+
+        .mobile-menu ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+
+        .mobile-menu li {
+          margin-bottom: 20px;
+        }
+
+        .mobile-menu a {
+          display: block;
+          padding: 15px;
+          font-size: 18px;
+          font-weight: 600;
+          color: var(--color-text-dark);
+          text-decoration: none;
+          border-radius: 10px;
+          transition: all 0.3s ease;
+          background-color: rgba(255, 105, 180, 0.1);
+        }
+
+        .mobile-menu a:hover {
+          background-color: var(--color-main-pink);
+          color: white;
+          transform: translateX(10px);
+        }
+
+        .close-menu {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          background: none;
+          border: none;
+          font-size: 30px;
+          color: var(--color-text-dark);
+          cursor: pointer;
+        }
+
+        /* Оверлей для затемнения фона */
+        .menu-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          z-index: 1999;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease;
+          display: block;
+        }
+
+        .menu-overlay.active {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        /* Анимация гамбургера при открытии */
+        .hamburger-menu.active .hamburger-line:nth-child(1) {
+          transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger-menu.active .hamburger-line:nth-child(2) {
+          opacity: 0;
+        }
+
+        .hamburger-menu.active .hamburger-line:nth-child(3) {
+          transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        #cart-button {
+          width: 60px;
+          height: 60px;
+          bottom: 20px;
+          right: 20px;
+        }
+
+        #cart-button svg {
+          width: 25px;
+          height: 25px;
+        }
+
+        #cart-counter {
+          width: 20px;
+          height: 20px;
+          font-size: 12px;
+        }
+      }
+
+      /* --- Адаптация для экранов до 480px (ТЕЛЕФОНЫ) --- */
+      @media (max-width: 480px) {
+        .header {
+          padding: 12px 15px;
+        }
+
+        .header-brand h1 {
+          font-size: 20px;
+        }
+
+        .brand-logo {
+          height: 35px;
+        }
+
+        .catalog-section h2 {
+          font-size: 32px;
+        }
+
+        .catalog-controls {
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 10px;
+        }
+
+        /* ИЗМЕНЕНИЯ ДЛЯ ПРОПОРЦИЙ КАРТОЧЕК */
+        .catalog-section {
+          padding: 20px 5px; /* Минимальный отступ от краев */
+        }
+
+        .product-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 8px; /* Минимальный отступ */
+        }
+
+        .product-card {
+          padding: 8px; /* Минимальный внутренний отступ */
+          /* ИЗМЕНЕНИЕ ДЛЯ САМОЙ УЗКОЙ МОБИЛЬНОЙ ВЕРСИИ */
+          padding-top: 25px;
+        }
+
+        /* ИЗМЕНЕНИЕ: Отступ для бейджей, чтобы они не накладывались */
+        .product-badge {
+          top: 4px;
+          left: 4px;
+          padding: 3px 6px;
+          font-size: 10px;
+        }
+
+        .product-card h3 {
+          font-size: 14px;
+          min-height: 38px; /* Уменьшаем высоту заголовка */
+          margin: 5px 0 3px;
+        }
+
+        .product-card img {
+          height: 100px; /* Уменьшаем высоту изображения */
+        }
+
+        .product-card .product-price .price {
+          font-size: 18px; /* Уменьшаем цену */
+        }
+
+        .product-card button {
+          padding: 6px 8px; /* Уменьшаем кнопку */
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-brand">
+        <a href="index.html" class="brand-link">
+          <img
+            src="images/logo.png"
+            alt="Логотип Sweet World"
+            class="brand-logo"
+          />
+          <h1>SWEET WORLD</h1>
+        </a>
+      </div>
+
+      <button class="hamburger-menu" id="hamburger-menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <div class="menu-overlay" id="menu-overlay"></div>
+      <div class="mobile-menu" id="mobile-menu">
+        <button class="close-menu" id="close-menu">×</button>
+        <nav>
+          <ul>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="boxes.html">Боксы</a></li>
+            <li><a href="index.html#how-to-buy">Как купить</a></li>
+            <li><a href="index.html#why-us">Почему мы</a></li>
+            <li><a href="index.html#faq">Вопросы и ответы</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <nav class="nav-menu">
+        <ul>
+          <li class="dropdown">
+            <a href="catalog.html" class="dropbtn">Каталог</a>
+          </li>
+          <li><a href="boxes.html">Боксы</a></li>
+          <li class="dropdown">
+            <a href="index.html" class="dropbtn">О нас</a>
+            <div class="dropdown-content">
+              <a href="index.html#how-to-buy">Как купить</a>
+              <a href="index.html#why-us">Почему мы</a>
+              <a href="index.html#faq">Вопросы и ответы</a>
+            </div>
+          </li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="catalog-section">
+        <h2>Каталог</h2>
+        <div class="catalog-intro">
+          <p>
+            Добро пожаловать в мир уникальных вкусов! Мы собрали для вас лучшие
+            сладости и напитки со всего мира. Наслаждайтесь каждым моментом,
+            выбирая свое идеальное лакомство.
+          </p>
+        </div>
+        <div class="catalog-controls">
+          <div class="sort-options">
+            <label for="sort-by">Сортировать по:</label>
+            <select id="sort-by">
+              <option value="name-asc">Названию (А-Я)</option>
+              <option value="name-desc">Названию (Я-А)</option>
+              <option value="price-asc">Цене (сначала дешевые)</option>
+              <option value="price-desc">Цене (сначала дорогие)</option>
+            </select>
+          </div>
+        </div>
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/pepero_air.jpg" />
+            <h3 class="product-name">PEPERO (воздушная кукуруза)</h3>
+            <div class="product-footer">
+              <p class="grams">39 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="129">
+                  <span class="price">129</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="16"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/pepero_cookie.jpg" />
+            <h3 class="product-name">Соломка PEPERO (крошки печенья)</h3>
+            <div class="product-footer">
+              <p class="grams">39 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="129">
+                  <span class="price">129</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="17"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/love_is.jpg" />
+            <h3 class="product-name">Love Is...</h3>
+            <div class="product-footer">
+              <p class="grams">4,2 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="8">
+                  <span class="price">8</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="18"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/monster_blueberry.jpg" />
+            <h3 class="product-name">Monster Черникус</h3>
+            <div class="product-footer">
+              <p class="grams">55 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="169">
+                  <span class="price">169</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="19"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/monster_grape.jpg" />
+            <h3 class="product-name">Monster Виноградус</h3>
+            <div class="product-footer">
+              <p class="grams">55 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="169">
+                  <span class="price">169</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="20"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/lutti_tubble_gum_raspberry.jpg" />
+            <h3 class="product-name">Lutti Tubble Gum (Малина)</h3>
+            <div class="product-footer">
+              <p class="grams">36 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="149">
+                  <span class="price">149</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="21"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/lutti_tubble_gum_cherry.jpg" />
+            <h3 class="product-name">Lutti Tubble Gum (Вишня)</h3>
+            <div class="product-footer">
+              <p class="grams">36 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="149">
+                  <span class="price">149</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="22"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/happy_hippo.jpg" />
+            <h3 class="product-name">Happy hippo haselnuss</h3>
+            <div class="product-footer">
+              <p class="grams">20.7 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="79">
+                  <span class="price">79</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="23"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/bounty_wafer.jpg" />
+            <h3 class="product-name">Bounty wafer rolls</h3>
+            <div class="product-footer">
+              <p class="grams">24 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="79">
+                  <span class="price">79</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="24"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/twix_rolls.jpg" />
+            <h3 class="product-name">Twix crispy rolls</h3>
+            <div class="product-footer">
+              <p class="grams">23 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="79">
+                  <span class="price">79</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="25"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/oreo_wafers_strawberry.jpg" />
+            <h3 class="product-name">Oreo Wafers (клубника)</h3>
+            <div class="product-footer">
+              <p class="grams">н/д</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="159">
+                  <span class="price">159</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="26"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/oreo_wafers_vanilla.jpg" />
+            <h3 class="product-name">Oreo Wafers (ваниль)</h3>
+            <div class="product-footer">
+              <p class="grams">н/д</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="159">
+                  <span class="price">159</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="27"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/fini_tubes_strawberry_banana.jpg" />
+            <h3 class="product-name">Fini tubes creamy (Клубника банан)</h3>
+            <div class="product-footer">
+              <p class="grams">80 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="189">
+                  <span class="price">189</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="28"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/fini_tubes_yogurt_mango.jpg" />
+            <h3 class="product-name">Fini tubes creamy (Йогурт манго)</h3>
+            <div class="product-footer">
+              <p class="grams">80 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="189">
+                  <span class="price">189</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="29"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/JimmyDamla.jpg" />
+            <h3 class="product-name">Damla / Jimmy</h3>
+            <div class="product-footer">
+              <p class="grams">80 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="139">
+                  <span class="price">139</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="31"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/milka_mini_stars.jpg" />
+            <h3 class="product-name">Milka Mini Stars White choco</h3>
+            <div class="product-footer">
+              <p class="grams">150 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="199">
+                  <span class="price">199</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="32"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/milka_waffelini.jpg" />
+            <h3 class="product-name">Milka waffelini</h3>
+            <div class="product-footer">
+              <p class="grams">35 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="79">
+                  <span class="price">79</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="33"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/kit_kat_peanut.jpg" />
+            <h3 class="product-name">Kit Kat с арахисовой пастой</h3>
+            <div class="product-footer">
+              <p class="grams">42 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="109">
+                  <span class="price">109</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="34"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/maltesers.jpg" alt="Maltesers" />
+            <h3 class="product-name">Maltesers</h3>
+            <div class="product-footer">
+              <p class="grams">40 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="157">
+                  <span class="price">157</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="1"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <img
+              src="images/arizona_arnold.jpg"
+              alt="Arizona Arnold Palmer Half-Half Iced Tea Lemonade"
+            />
+            <h3 class="product-name">
+              Arizona Arnold Palmer Half-Half Iced Tea Lemonade
+            </h3>
+            <div class="product-footer">
+              <p class="grams">0.65 л</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="315">
+                  <span class="price">315</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="2"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge top-seller">Топ-продаж</div>
+            <img src="images/nutella.jpg" alt="Нутелла" />
+            <h3 class="product-name">Nutella</h3>
+            <div class="product-footer">
+              <p class="grams">25 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="130">
+                  <span class="price">130</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="3"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <img
+              src="images/green_tea_cucumber.jpg"
+              alt="Зеленый чай с огурцом"
+            />
+            <h3 class="product-name">Arizona Green Tea Cucumber Citrus</h3>
+            <div class="product-footer">
+              <p class="grams">0.65 л</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="315">
+                  <span class="price">315</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="4"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <img src="images/fanta_strawberry.jpg" alt="Fanta Strawberry" />
+            <h3 class="product-name">Fanta Strawberry</h3>
+            <div class="product-footer">
+              <p class="grams">0.5 л</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="176">
+                  <span class="price">176</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="5"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <img src="images/fanta_grape.jpg" alt="Fanta Grape" />
+            <h3 class="product-name">Fanta Grape</h3>
+            <div class="product-footer">
+              <p class="grams">0.5 л</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="176">
+                  <span class="price">176</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="6"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <img
+              src="images/damla_sour_pencil.jpg"
+              alt="Кислая карандашная конфета Damla"
+            />
+            <h3 class="product-name">Damla</h3>
+            <div class="product-footer">
+              <p class="grams">150 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="153">
+                  <span class="price">153</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="7"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <img src="images/arizona_orangeade.jpg" alt="Arizona Orangeade" />
+            <h3 class="product-name">Arizona Orangeade</h3>
+            <div class="product-footer">
+              <p class="grams">0.65 л</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="315">
+                  <span class="price">315</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="8"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <img src="images/toxic.jpg" alt="Toxic Waste" />
+            <h3 class="product-name">Toxic Waste</h3>
+            <div class="product-footer">
+              <p class="grams">42 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="200">
+                  <span class="price">200</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="9"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <img src="images/feastables.jpg" alt="Feastables" />
+            <h3 class="product-name">Feastables</h3>
+            <div class="product-footer">
+              <p class="grams">60 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="350">
+                  <span class="price">350</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="10"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge new-arrival">Новинка</div>
+            <img src="images/milka_bonibon.jpg" alt="Milka Bonibon" />
+            <h3 class="product-name">Milka Bonibon</h3>
+            <div class="product-footer">
+              <p class="grams">20 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="135">
+                  <span class="price">135</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="11"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <img src="images/wispa.jpg" alt="Wispa" />
+            <h3 class="product-name">Wispa</h3>
+            <div class="product-footer">
+              <p class="grams">36 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="158">
+                  <span class="price">158</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="12"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-badge top-seller">Топ-продаж</div>
+            <img src="images/haribo.jpg" alt="Haribo" />
+            <h3 class="product-name">Haribo</h3>
+            <div class="product-footer">
+              <p class="grams">100 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="170">
+                  <span class="price">170</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="13"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <img src="images/milka_choco_wafer.jpg" alt="Milka Choco Wafer" />
+            <h3 class="product-name">Milka Choco Wafer</h3>
+            <div class="product-footer">
+              <p class="grams">30 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="80">
+                  <span class="price">80</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="14"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <img src="images/kinder_hippo.jpg" alt="Kinder Hippo" />
+            <h3 class="product-name">Kinder Hippo</h3>
+            <div class="product-footer">
+              <p class="grams">20 гр.</p>
+              <p class="stock-info">
+                В наличии: <span class="stock-quantity">10</span> шт.
+              </p>
+              <div class="buttons">
+                <div class="product-price" data-price="380">
+                  <span class="price">380</span> ₽
+                </div>
+                <button
+                  class="button-buy add-to-cart-button"
+                  data-product-id="15"
+                >
+                  Купить
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- БЛОК КОНТАКТОВ -->
+      <section class="contacts-section" id="contacts">
+        <h3 class="contacts-title">Контакты</h3>
+        <div class="contacts-container">
+          <div class="contacts-left">
+            <a href="mailto:swtwrld@yandex.ru" class="contact-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                ></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              swtwrld@yandex.ru
+            </a>
+            <a href="tel:+79939032818" class="contact-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                ></path>
+              </svg>
+              +7 (993) 903-28-18
+            </a>
+          </div>
+          <div class="contacts-right">
+            <a
+              href="https://t.me/SwWrld"
+              class="contact-button telegram"
+              target="_blank"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.14.141-.259.259-.374.261l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.136-.954l11.566-4.458c.538-.196 1.006.128.832.941z"
+                />
+              </svg>
+              Telegram
+            </a>
+            <a
+              href="https://wa.me/message/W76VJZTDSOLXM1"
+              class="contact-button whatsapp"
+              target="_blank"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12.017 2.047c-5.511 0-9.98 4.468-9.98 9.98 0 1.768.468 3.475 1.348 4.96l-1.348 4.96 5.1-1.3c1.5.8 3.2 1.3 5 1.3 5.5 0 10-4.5 10-10s-4.5-10-10-10zm-5.5 15.5l.4-.2-1.1-2.9-.2-.4c-1-1.5-1-3.3 0-4.8.5-.8 1.2-1.4 2.1-1.8.8-.4 1.7-.5 2.6-.3.9.2 1.7.7 2.3 1.4.6.7.9 1.6.9 2.5 0 .9-.3 1.8-.9 2.5-.6.7-1.4 1.2-2.3 1.4-.9.2-1.8.1-2.6-.3-.9-.4-1.6-1-2.1-1.8zm11.5 0l.4-.2-1.1-2.9-.2-.4c-1-1.5-1-3.3 0-4.8.5-.8 1.2-1.4 2.1-1.8.8-.4 1.7-.5 2.6-.3.9.2 1.7.7 2.3 1.4.6.7.9 1.6.9 2.5 0 .9-.3 1.8-.9 2.5-.6.7-1.4 1.2-2.3 1.4-.9.2-1.8.1-2.6-.3-.9-.4-1.6-1-2.1-1.8z"
+                />
+              </svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <button id="cart-button">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path
+          d="M1 1h4l2.68 13.39a2 2 0 0 0 1.95 1.61h9.74a2 2 0 0 0 1.95-1.61L23 6H6"
+        ></path>
+      </svg>
+      <span id="cart-counter">0</span>
+    </button>
+
+    <script>
+      let cartCounter = document.getElementById("cart-counter");
+      let cartButton = document.getElementById("cart-button");
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      updateCartCounter();
+
+      document.querySelectorAll(".add-to-cart-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          const productCard = button.closest(".product-card");
+          const productId = button.getAttribute("data-product-id");
+
+          const nameElement = productCard.querySelector(
+            ".product-name, .product-name-text"
+          );
+          if (!nameElement) {
+            console.error(
+              "Имя продукта не найдено в карточке с ID:",
+              button.getAttribute("data-product-id")
+            );
+            return; // Прерываем, чтобы не было ошибки
+          }
+          const productName = nameElement.textContent.trim();
+
+          const productPrice = parseFloat(
+            productCard.querySelector(".product-price").dataset.price
+          );
+          // Получаем путь к изображению
+          const productImage = productCard.querySelector("img").src;
+
+          let existingProduct = cartItems.find((item) => item.id === productId);
+
+          if (existingProduct) {
+            existingProduct.quantity++;
+          } else {
+            cartItems.push({
+              id: productId,
+              name: productName,
+              price: productPrice,
+              quantity: 1,
+              // Добавляем изображение в объект
+              image: productImage,
+            });
+          }
+
+          localStorage.setItem("cartItems", JSON.stringify(cartItems));
+          updateCartCounter();
+        });
+      });
+
+      if (cartButton) {
+        cartButton.addEventListener("click", () => {
+          try {
+            window.location.href = "cart.html";
+          } catch (error) {
+            console.error("Ошибка при переходе в корзину:", error);
+          }
+        });
+      } else {
+        console.error("Кнопка корзины (#cart-button) не найдена в DOM.");
+      }
+
+      function updateCartCounter() {
+        let totalItems = cartItems.reduce(
+          (sum, item) => sum + item.quantity,
+          0
+        );
+        cartCounter.textContent = totalItems;
+      }
+
+      // --- НОВАЯ ЛОГИКА ДЛЯ СОРТИРОВКИ ТОВАРОВ ---
+      const sortBySelect = document.getElementById("sort-by");
+      const productGrid = document.querySelector(".product-grid");
+
+      /**
+       * Функция для сортировки и обновления порядка товаров в каталоге.
+       */
+      function sortProducts() {
+        const sortValue = sortBySelect.value;
+        // Получаем все карточки товаров в виде массива
+        let products = Array.from(productGrid.children);
+
+        products.sort((a, b) => {
+          // Извлекаем данные для сравнения
+          const nameElementA = a.querySelector(
+            ".product-name, .product-name-text"
+          );
+          const nameA = nameElementA
+            ? nameElementA.textContent.toLowerCase().trim()
+            : "";
+
+          const nameElementB = b.querySelector(
+            ".product-name, .product-name-text"
+          );
+          const nameB = nameElementB
+            ? nameElementB.textContent.toLowerCase().trim()
+            : "";
+
+          const priceA = parseFloat(
+            a.querySelector(".product-price").dataset.price
+          );
+          const priceB = parseFloat(
+            b.querySelector(".product-price").dataset.price
+          );
+
+          if (sortValue === "name-asc") {
+            // Сортировка по названию (А-Я) с поддержкой русского языка
+            return nameA.localeCompare(nameB, "ru");
+          } else if (sortValue === "name-desc") {
+            // Сортировка по названию (Я-А)
+            return nameB.localeCompare(nameA, "ru");
+          } else if (sortValue === "price-asc") {
+            // Сортировка по цене (сначала дешевые)
+            return priceA - priceB;
+          } else if (sortValue === "price-desc") {
+            // Сортировка по цене (сначала дорогие)
+            return priceB - priceA;
+          }
+          return 0; // Сохраняем порядок, если значение сортировки неизвестно
+        });
+
+        // Перестраиваем DOM: удаляем старые элементы и добавляем отсортированные
+        // Браузер автоматически переставит элементы в productGrid в новом порядке
+        products.forEach((product) => {
+          productGrid.appendChild(product);
+        });
+      }
+
+      // Вызываем сортировку при загрузке страницы, чтобы применить дефолтное значение
+      sortProducts();
+
+      // Добавляем обработчик события для изменения выпадающего списка сортировки
+      sortBySelect.addEventListener("change", sortProducts);
+      // --- КОНЕЦ ЛОГИКИ ДЛЯ СОРТИРОВКИ ТОВАРОВ ---
+
+      // --- ЛОГИКА ДЛЯ МОБИЛЬНОГО МЕНЮ (Гамбургер-меню) ---
+      const hamburger = document.getElementById("hamburger-menu");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const closeMenu = document.getElementById("close-menu");
+      const menuOverlay = document.getElementById("menu-overlay");
+
+      function toggleMenu() {
+        mobileMenu.classList.toggle("active");
+        hamburger.classList.toggle("active");
+        menuOverlay.classList.toggle("active");
+        // Блокировка прокрутки основного контента при открытом меню
+        document.body.style.overflow = mobileMenu.classList.contains("active")
+          ? "hidden"
+          : "";
+      }
+
+      // Открытие меню по клику на гамбургер
+      hamburger.addEventListener("click", toggleMenu);
+
+      // Закрытие меню по клику на крестик
+      closeMenu.addEventListener("click", toggleMenu);
+
+      // Закрытие меню по клику на оверлей (затемненный фон)
+      menuOverlay.addEventListener("click", toggleMenu);
+
+      // Закрытие меню по клику на любой пункт меню
+      const mobileMenuItems = mobileMenu.querySelectorAll("a");
+      mobileMenuItems.forEach((item) => {
+        item.addEventListener("click", (event) => {
+          setTimeout(toggleMenu, 300);
+        });
+      });
+      // --- КОНЕЦ ЛОГИКИ ДЛЯ МОБИЛЬНОГО МЕНЮ ---
+    </script>
+  </body>
+</html>

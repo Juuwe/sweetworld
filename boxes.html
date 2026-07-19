@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Боксы - SWEET WORLD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* --- УНИВЕРСАЛЬНЫЙ BOX-SIZING --- */
+      * {
+        box-sizing: border-box;
+      }
+
+      /* ИСПРАВЛЕНИЕ: Гарантированное устранение горизонтальной прокрутки */
+      html {
+        overflow-x: hidden;
+      }
+
+      :root {
+        --color-main-pink: #ff69b4; /* Яркий розовый */
+        --color-main-blue: #00bfff; /* Глубокий голубой */
+        --color-main-yellow: #ffdd00; /* Солнечный желтый */
+        --color-text-dark: #4b0082; /* Индиго для текста */
+        --color-text-light: #fff;
+        --color-accent: #ff4500; /* Оранжево-красный акцент */
+        /* ИСПРАВЛЕНИЕ ДЛЯ iOS: Добавлен систефмный стек для надежности */
+        --font-header: "Fredoka One", "Comic Sans MS", "Apple Chancery", cursive;
+        --font-body: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, "Helvetica Neue", Arial, sans-serif;
+      }
+
+      body {
+        font-family: var(--font-body);
+        margin: 0;
+        color: var(--color-text-dark);
+        background-color: var(--color-main-pink);
+        position: relative;
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* Градиент в цветах сайта */
+        background: linear-gradient(
+          135deg,
+          var(--color-main-yellow) 0%,
+          var(--color-main-pink) 50%,
+          var(--color-main-blue) 100%
+        );
+        z-index: -1;
+        background-size: 400% 400%;
+        animation: gradient-animation 20s ease infinite;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* Конфетти из эмодзи в виде SVG */
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ctext x='10' y='20' font-family='Arial' font-size='15'%3E%F0%9F%8D%AD%3C/text%3E%3Ctext x='70' y='50' font-family='Arial' font-size='15'%3E%E2%AD%90%EF%B8%8F%3C/text%3E%3Ctext x='30' y='80' font-family='Arial' font-size='15'%3E%F0%9F%8D%AC%3C/text%3E%3Ctext x='90' y='10' font-family='Arial' font-size='15'%3E%E2%AD%90%EF%B8%8F%3C/text%3E%3Ctext x='50' y='40' font-family='Arial' font-size='15'%3E%F0%9F%8D%AB%3C/text%3E%3C/g%3E%3C/svg%3E");
+        animation: confetti-animation 60s linear infinite;
+        z-index: -1;
+      }
+
+      @keyframes gradient-animation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes confetti-animation {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 500px 500px;
+        }
+      }
+
+      .header {
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 20px 50px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .header a {
+        text-decoration: none;
+        color: var(--color-text-dark);
+        transition: transform 0.2s ease-in-out;
+      }
+
+      .header-brand h1 {
+        font-family: var(--font-header);
+        font-weight: 700;
+        margin: 0;
+        font-size: 40px;
+        color: var(--color-main-pink);
+        text-shadow: 2px 2px 0px var(--color-text-dark);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .brand-link {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .brand-logo {
+        height: 60px;
+        width: auto;
+        transition: transform 0.2s ease-in-out;
+      }
+
+      .brand-link:hover .brand-logo {
+        transform: scale(1.05);
+      }
+
+      /* Скрываем мобильные элементы по умолчанию (для ПК) */
+      .hamburger-menu,
+      .mobile-menu,
+      .menu-overlay {
+        display: none;
+      }
+      /* КОНЕЦ СКРЫТИЯ МОБИЛЬНЫХ ЭЛЕМЕНТОВ */
+
+      .nav-menu ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-menu a {
+        font-weight: 600;
+        font-size: 18px;
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      .nav-menu a::after {
+        content: "🍬";
+        position: absolute;
+        left: 50%;
+        bottom: -15px;
+        transform: translateX(-50%) scale(0);
+        transition: transform 0.3s ease-in-out;
+        font-size: 20px;
+      }
+
+      .nav-menu a:hover {
+        color: var(--color-accent);
+      }
+
+      .nav-menu a:hover::after {
+        transform: translateX(-50%) scale(1);
+      }
+
+      /* Стили для выпадающего меню */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #fef4f4;
+        min-width: 180px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 2px solid var(--color-main-pink);
+        top: calc(100% + 15px);
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .dropdown-content a {
+        color: var(--color-text-dark);
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        font-weight: 500;
+        transition: background-color 0.2s ease-in-out;
+      }
+
+      .dropdown-content a:hover {
+        background-color: var(--color-main-yellow);
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      .main-layout {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 30px;
+      }
+
+      .content-section {
+        padding: 40px;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .content-section h2 {
+        font-family: var(--font-header);
+        font-size: 48px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
+        line-height: 1.2;
+        color: var(--color-main-pink);
+        text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .product-item {
+        /* Изменение для кликабельности всего элемента */
+        background-color: var(--color-main-blue);
+        color: var(--color-text-light);
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out,
+          background-color 0.3s ease-in-out; /* Добавлено transition для background */
+        cursor: default; /* Убираем указатель */
+        position: relative;
+        text-align: center;
+      }
+
+      .product-item:hover {
+        transform: translateY(-5px) scale(1.02);
+        background-color: var(
+          --color-main-pink
+        ); /* Небольшое изменение цвета при наведении */
+      }
+
+      .product-item:hover h3 {
+        color: var(
+          --color-text-dark
+        ); /* Изменение цвета заголовка для контраста */
+      }
+
+      .product-image-container {
+        height: 180px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .product-image {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .product-item:hover .product-image {
+        transform: scale(1.05);
+      }
+
+      .product-item h3 {
+        font-family: var(--font-header);
+        font-size: 24px;
+        margin-top: 0;
+        margin-bottom: 5px;
+        color: var(--color-main-yellow);
+        transition: color 0.3s ease-in-out; /* Добавлено transition */
+      }
+
+      .product-item p {
+        font-size: 16px;
+        line-height: 1.4;
+        margin-bottom: 15px;
+        min-height: 48px;
+      }
+
+      .price {
+        font-family: var(--font-header);
+        font-size: 28px;
+        color: var(--color-text-light);
+        text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+        margin-top: 10px;
+        margin-bottom: 15px; /* Добавлен отступ */
+      }
+
+      /* --- СТИЛИ ДЛЯ КНОПОК В КАРТОЧКЕ --- */
+      .button-group {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .product-button {
+        flex: 1; /* Обе кнопки занимают одинаковое пространство */
+        border: none;
+        padding: 10px 15px;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      }
+
+      .product-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .details-button {
+        background-color: var(--color-main-yellow);
+        color: var(--color-text-dark);
+      }
+
+      .details-button:hover {
+        background-color: #ffc400; /* Более темный желтый */
+      }
+
+      .buy-button {
+        background-color: var(--color-accent);
+        color: var(--color-text-light);
+      }
+
+      .buy-button:hover {
+        background-color: #cc3700; /* Более темный оранжево-красный */
+      }
+      /* --- КОНЕЦ СТИЛЕЙ ДЛЯ КНОПОК В КАРТОЧКЕ --- */
+
+      /* --- Стили для блока контактов (новые, как в catalog.html) --- */
+      .contacts-section {
+        padding: 60px 30px;
+        background-color: rgba(255, 255, 255, 0.9);
+        margin: 40px auto;
+        border-radius: 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        max-width: 1300px;
+        width: calc(100% - 60px);
+      }
+
+      .contacts-title {
+        font-family: var(--font-header);
+        font-size: 36px;
+        text-align: center;
+        margin: 0 0 30px 0;
+        padding-top: 0;
+        color: var(--color-text-dark);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .contacts-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .contacts-left {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+      }
+
+      .contact-link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: var(--color-text-dark);
+        font-weight: 600;
+        font-size: 18px;
+        transition: all 0.3s ease;
+      }
+
+      .contact-link:hover {
+        color: var(--color-main-pink);
+        transform: translateX(5px);
+      }
+
+      .contact-link svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .contacts-right {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .contact-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .contact-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .contact-button.telegram {
+        background-color: #0088cc;
+      }
+
+      .contact-button.whatsapp {
+        background-color: #25d366;
+      }
+
+      .contact-button svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      /* --- Адаптация контактов для мобильных --- */
+      @media (max-width: 768px) {
+        .contacts-section {
+          padding: 40px 20px;
+          width: calc(100% - 40px);
+          margin: 20px auto;
+        }
+
+        .contacts-title {
+          font-size: 28px;
+          margin-bottom: 20px;
+        }
+
+        .contacts-container {
+          flex-direction: column;
+          gap: 30px;
+          text-align: center;
+        }
+
+        .contacts-left {
+          align-items: center;
+        }
+
+        .contact-link {
+          justify-content: center;
+        }
+
+        .contacts-right {
+          align-items: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .contacts-section {
+          padding: 30px 15px;
+          width: calc(100% - 30px);
+        }
+
+        .contacts-title {
+          font-size: 24px;
+        }
+
+        .contacts-right {
+          width: 100%;
+        }
+
+        .contact-button {
+          justify-content: center;
+          width: 100%;
+          max-width: 200px;
+        }
+      }
+
+      /* Стили для кнопки корзины */
+      #cart-button {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: var(--color-main-pink);
+        color: #fff;
+        border: 4px solid var(--color-accent);
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        z-index: 900;
+      }
+
+      #cart-button:hover {
+        transform: scale(1.1) rotate(10deg);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      }
+
+      #cart-button svg {
+        width: 35px;
+        height: 35px;
+      }
+
+      #cart-counter {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background-color: var(--color-accent);
+        color: #fff;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        font-weight: bold;
+        animation: pulse 1.5s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(255, 69, 0, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 69, 0, 0);
+        }
+      }
+
+      /* --- СТИЛИ ДЛЯ МОБИЛЬНОГО МЕНЮ --- */
+      .hamburger-menu {
+        display: none;
+      }
+
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 80%;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        z-index: 2000;
+        padding: 80px 30px 30px;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+        overflow-x: hidden;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        display: block;
+      }
+
+      .mobile-menu.active {
+        transform: translateX(0);
+      }
+
+      .mobile-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .mobile-menu li {
+        margin-bottom: 20px;
+        list-style: none;
+      }
+
+      .mobile-menu a {
+        display: block;
+        padding: 15px;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--color-text-dark);
+        text-decoration: none;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        background-color: rgba(255, 105, 180, 0.1);
+      }
+
+      .mobile-menu a:hover {
+        background-color: var(--color-main-pink);
+        color: white;
+        transform: translateX(10px);
+      }
+
+      .close-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 30px;
+        color: var(--color-text-dark);
+        cursor: pointer;
+        z-index: 2005;
+      }
+
+      .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      /* КОНЕЦ СТИЛЕЙ ДЛЯ МОБИЛЬНОГО МЕНЮ */
+
+      /* --- СТИЛИ ДЛЯ МОДАЛЬНОГО ОКНА --- */
+      .modal-overlay {
+        display: none; /* Скрыто по умолчанию */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(75, 0, 130, 0.7); /* Темный индиго оверлей */
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+
+      .modal-overlay.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .modal-content {
+        background-color: #fef4f4;
+        color: var(--color-text-dark);
+        max-width: 600px;
+        width: 90%;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        /* ИСПРАВЛЕНИЕ: Увеличенный верхний padding, чтобы контент начинался ниже крестика */
+        padding: 60px 30px 30px;
+        position: relative;
+        max-height: 90vh; /* Ограничение высоты */
+        overflow-y: auto; /* Прокрутка при необходимости */
+        transform: scale(0.9);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .modal-overlay.active .modal-content {
+        transform: scale(1);
+      }
+
+      /* ПОЗИЦИОНИРОВАНИЕ КРЕСТИКА (ПК) */
+      .modal-close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 30px; /* Сохраняем большой размер */
+        font-weight: 300;
+        cursor: pointer;
+        color: var(--color-main-pink);
+        transition: transform 0.2s ease-in-out;
+        /* Z-INDEX гарантирует, что крестик поверх контента */
+        z-index: 99999;
+      }
+
+      .modal-close:hover {
+        transform: rotate(90deg);
+      }
+
+      .modal-image {
+        width: 100%;
+        max-height: 250px;
+        object-fit: contain;
+        margin-bottom: 20px;
+        border-radius: 15px;
+        /* Исходная толщина 3px */
+        border: 3px solid var(--color-main-blue);
+      }
+
+      .modal-name {
+        font-family: var(--font-header);
+        font-size: 36px;
+        color: var(--color-main-pink);
+        margin-bottom: 10px;
+      }
+
+      .modal-price {
+        font-family: var(--font-header);
+        font-size: 32px;
+        color: var(--color-accent);
+        margin-bottom: 20px;
+        padding: 5px 15px;
+        display: inline-block;
+        border-radius: 10px;
+        background-color: var(--color-main-yellow);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .modal-description h4 {
+        font-family: var(--font-header);
+        color: var(--color-main-blue);
+        margin-top: 15px;
+        margin-bottom: 5px;
+        font-size: 20px;
+      }
+
+      .modal-description ul {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0 20px;
+        text-align: left;
+        font-size: 14px;
+        column-count: 2; /* Разбивка на две колонки на ПК */
+        gap: 20px;
+      }
+
+      .modal-description li {
+        margin-bottom: 5px;
+        padding-left: 1.5em;
+        text-indent: -1.5em;
+      }
+
+      .modal-description li::before {
+        content: "⭐"; /* Сладкий маркер списка */
+        margin-right: 5px;
+      }
+
+      .modal-description p {
+        text-align: left;
+        font-size: 16px;
+      }
+
+      /* Кнопка "Добавить в корзину" в модальном окне */
+      .modal-add-to-cart {
+        background-color: var(--color-accent);
+        color: var(--color-text-light);
+        border: none;
+        padding: 15px 35px;
+        border-radius: 30px;
+        font-size: 18px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+        position: relative;
+        overflow: hidden;
+        margin-top: 20px;
+        width: 100%; /* На всю ширину */
+      }
+
+      .modal-add-to-cart:hover {
+        background-color: var(--color-main-pink);
+      }
+
+      @media (max-width: 900px) {
+        /* Общее улучшение адаптивности */
+        .main-layout {
+          padding: 0 20px;
+        }
+
+        .product-grid {
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 20px;
+        }
+
+        .header-brand h1 {
+          font-size: 24px;
+        }
+
+        .brand-logo {
+          height: 40px;
+        }
+
+        .nav-menu {
+          display: none;
+        }
+
+        .hamburger-menu {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          width: 30px;
+          height: 25px;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          padding: 0;
+          margin: 0;
+          margin-left: auto;
+          position: relative;
+          z-index: 2001;
+        }
+
+        .hamburger-line {
+          width: 100%;
+          height: 3px;
+          background-color: var(--color-text-dark);
+          border-radius: 2px;
+          transition: all 0.3s ease;
+        }
+
+        /* Анимация крестика (скрыта, но нужна для UX) */
+        .hamburger-menu.active {
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        /* Основной контент */
+        .content-section {
+          padding: 20px;
+        }
+
+        .content-section h2 {
+          font-size: 32px;
+        }
+
+        /* Сетка в одну колонку */
+        .product-grid {
+          grid-template-columns: 1fr;
+        }
+
+        /* Стили для мобильного меню */
+        .hamburger-menu {
+          display: flex;
+        }
+
+        /* Мобильный стиль для кнопок в карточке */
+        .button-group {
+          gap: 5px;
+        }
+
+        .product-button {
+          font-size: 13px;
+          padding: 10px 10px;
+        }
+
+        /* Мобильный стиль для корзины */
+        #cart-button {
+          bottom: 15px;
+          right: 15px;
+          border: 4px solid var(--color-accent);
+        }
+
+        #cart-counter {
+          width: 20px;
+          height: 20px;
+          font-size: 12px;
+        }
+
+        /* Модальное окно на мобильных */
+        .modal-content {
+          width: 100%;
+          height: 100%;
+          max-height: 100vh;
+          border-radius: 0;
+          /* ИСПРАВЛЕНИЕ: Скорректирован padding для мобильных, чтобы контент был ниже крестика */
+          padding: 50px 30px 20px;
+          overflow-y: scroll;
+        }
+
+        .modal-image {
+          max-height: 200px;
+          /* Толщина 3px */
+          border: 3px solid var(--color-main-blue);
+        }
+
+        /* Крестик остается большим и смещенным */
+        .modal-close {
+          font-size: 30px;
+          top: 15px;
+          right: 15px;
+          z-index: 99999; /* Гарантированный z-index */
+        }
+
+        .modal-name {
+          font-size: 28px;
+        }
+
+        .modal-price {
+          font-size: 24px;
+        }
+
+        .modal-description ul {
+          column-count: 1; /* Список в одну колонку на мобильных */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-brand">
+        <a href="index.html" class="brand-link">
+          <img
+            src="images/logo.png"
+            alt="Логотип Sweet World"
+            class="brand-logo"
+          />
+          <h1>SWEET WORLD</h1>
+        </a>
+      </div>
+
+      <button class="hamburger-menu" id="hamburger-menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <div class="menu-overlay" id="menu-overlay"></div>
+      <div class="mobile-menu" id="mobile-menu">
+        <button class="close-menu" id="close-menu">×</button>
+        <nav>
+          <ul>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="boxes.html">Боксы</a></li>
+            <li><a href="index.html#how-to-buy">Как купить</a></li>
+            <li><a href="index.html#why-us">Почему мы</a></li>
+            <li><a href="index.html#faq">Вопросы и ответы</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <nav class="nav-menu">
+        <ul>
+          <li class="dropdown">
+            <a href="catalog.html" class="dropbtn">Каталог</a>
+          </li>
+          <li><a href="boxes.html">Боксы</a></li>
+          <li class="dropdown">
+            <a href="index.html" class="dropbtn">О нас</a>
+            <div class="dropdown-content">
+              <a href="index.html#how-to-buy">Как купить</a>
+              <a href="index.html#why-us">Почему мы</a>
+              <a href="index.html#faq">Вопросы и ответы</a>
+            </div>
+          </li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main-layout">
+      <section class="content-section">
+        <h2>Наборы сладостей</h2>
+        <div class="product-grid" id="product-grid"></div>
+      </section>
+
+      <section class="contacts-section" id="contacts">
+        <h3 class="contacts-title">Контакты</h3>
+        <div class="contacts-container">
+          <div class="contacts-left">
+            <a href="mailto:swtwrld@yandex.ru" class="contact-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                ></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              swtwrld@yandex.ru
+            </a>
+            <a href="tel:+79939032818" class="contact-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                ></path>
+              </svg>
+              +7 (993) 903-28-18
+            </a>
+          </div>
+          <div class="contacts-right">
+            <a
+              href="https://t.me/SwWrld"
+              class="contact-button telegram"
+              target="_blank"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.14.141-.259.259-.374.261l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.136-.954l11.566-4.458c.538-.196 1.006.128.832.941z"
+                />
+              </svg>
+              Telegram
+            </a>
+            <a
+              href="https://wa.me/message/W76VJZTDSOLXM1"
+              class="contact-button whatsapp"
+              target="_blank"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12.017 2.047c-5.511 0-9.98 4.468-9.98 9.98 0 1.768.468 3.475 1.348 4.96l-1.348 4.96 5.1-1.3c1.5.8 3.2 1.3 5 1.3 5.5 0 10-4.5 10-10s-4.5-10-10-10zm-5.5 15.5l.4-.2-1.1-2.9-.2-.4c-1-1.5-1-3.3 0-4.8.5-.8 1.2-1.4 2.1-1.8.8-.4 1.7-.5 2.6-.3.9.2 1.7.7 2.3 1.4.6.7.9 1.6.9 2.5 0 .9-.3 1.8-.9 2.5-.6.7-1.4 1.2-2.3 1.4-.9.2-1.8.1-2.6-.3-.9-.4-1.6-1-2.1-1.8zm11.5 0l.4-.2-1.1-2.9-.2-.4c-1-1.5-1-3.3 0-4.8.5-.8 1.2-1.4 2.1-1.8.8-.4 1.7-.5 2.6-.3.9.2 1.7.7 2.3 1.4.6.7.9 1.6.9 2.5 0 .9-.3 1.8-.9 2.5-.6.7-1.4 1.2-2.3 1.4-.9.2-1.8.1-2.6-.3-.9-.4-1.6-1-2.1-1.8z"
+                />
+              </svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="cart-button" role="button">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path
+          d="M1 1h4l2.68 13.39a2 2 0 0 0 1.95 1.61h9.74a2 2 0 0 0 1.95-1.61L23 6H6"
+        ></path>
+      </svg>
+      <span id="cart-counter">0</span>
+    </div>
+
+    <div id="box-modal" class="modal-overlay">
+      <div class="modal-content">
+        <span class="modal-close" id="modal-close-btn">&times;</span>
+        <div style="text-align: center">
+          <img
+            id="modal-image"
+            src=""
+            alt="Изображение бокса"
+            class="modal-image"
+          />
+          <h3 id="modal-name" class="modal-name"></h3>
+          <div id="modal-price" class="modal-price"></div>
+        </div>
+
+        <div id="modal-description" class="modal-description"></div>
+
+        <button class="modal-add-to-cart" id="modal-add-to-cart-btn" data-id="">
+          Добавить в корзину
+        </button>
+      </div>
+    </div>
+    <script>
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      const cartCounter = document.getElementById("cart-counter");
+      const productGrid = document.getElementById("product-grid");
+      const cartButton = document.getElementById("cart-button");
+
+      // Элементы модального окна
+      const modalOverlay = document.getElementById("box-modal");
+      const modalCloseBtn = document.getElementById("modal-close-btn");
+      const modalImage = document.getElementById("modal-image");
+      const modalName = document.getElementById("modal-name");
+      const modalPrice = document.getElementById("modal-price");
+      const modalDescription = document.getElementById("modal-description");
+      const modalAddToCartBtn = document.getElementById(
+        "modal-add-to-cart-btn"
+      );
+
+      // Полный список продуктов для наполнения описаний
+      const productList = [
+        "Nutella",
+        "Wispa",
+        "Milka Choco Wafel",
+        "Feastables",
+        "Milka Bonibon",
+        "Happy Hippo",
+        "KitKat",
+        "Maltesers",
+        "Damla",
+        "Jimmy",
+        "Toxic Waste",
+        "Arizona",
+        "pepsi",
+        "Fanta",
+        "Sprite",
+        "chupa chups",
+        "mars",
+        "nestle",
+        "oreo",
+        "samyang",
+        "today",
+        "ferrero",
+        "capri-sun",
+        "cadburv",
+      ];
+
+      // Функция для форматирования списка продуктов
+      function formatProductList(list) {
+        return `<ul>${list.map((item) => `<li>${item}</li>`).join("")}</ul>`;
+      }
+
+      // Обновленные данные с полным описанием
+      const boxes = [
+        // Изменение: "Sweet Start" (1230₽) теперь первый (самый дешевый)
+        {
+          id: 13,
+          name: "Sweet Start",
+          description:
+            "Мини-набор: 7 позиций — идеальный способ поднять настроение.",
+          price: 1230,
+          image: "images/mini_box.jpg",
+          details: {
+            title: "Идеальный мини-сюрприз (7 сладостей)",
+            short_desc:
+              "Забудьте о суете! Подарите яркие эмоции всего в одном клике. Наш сладкий подарочный набор из 7 отборных лакомств — это концентрация удовольствия и внимания. Это идеальный способ сказать «я думаю о тебе» легко, быстро и очень вкусно. Мы собрали самые популярные и любимые вкусы со всего мира.",
+            ideal_for:
+              "Идеально для: небольшого сюрприза коллеге, милого знака внимания подруге, комплимента от отеля или просто чтобы поднять себе настроение. Порадуйте близких без лишних слов — выберите компактный набор из 7 сладких впечатлений!",
+            guaranteed_items: formatProductList(productList),
+          },
+        },
+        // Изменение: "Sweet Journey" (1520₽) теперь второй
+        {
+          id: 12,
+          name: "Sweet Journey",
+          description:
+            "Средний набор: 12 позиций — золотая середина для гурманов.",
+          price: 1520,
+          image: "images/mid_box.jpg",
+          details: {
+            title: "Щедрый знак внимания (12 сладостей)",
+            short_desc:
+              "Создайте атмосферу настоящего праздника! Наш сладкий набор из 12 изысканных угощений — это золотая середина, которая позволит вам выразить свои чувства щедро и разнообразно. Мы объединили всемирно известные хиты и неожиданные вкусы, создав идеальную коллекцию для гурманов.",
+            ideal_for:
+              "Идеально для: подарка на день рождения, романтического свидания, благодарности близкому человеку или как главный сладкий сюрприз на любом мероприятии. Удобно, быстро и всегда уместно! Подарок из 12 позиций — это гарантия восторга и море положительных эмоций.",
+            guaranteed_items: formatProductList(productList),
+          },
+        },
+        // Изменение: "Sweet Universe" (2410₽) теперь третий (самый дорогой)
+        {
+          id: 11,
+          name: "Sweet Universe",
+          description:
+            "Самый большой набор: 20 позиций для роскошного праздника!",
+          price: 2410,
+          image: "images/big_box.jpg",
+          details: {
+            title: "Роскошный праздничный бокс (20 сладостей)",
+            short_desc:
+              "Подарите целый мир сладких наслаждений! Наш премиальный подарочный набор из 20 эксклюзивных позиций — это максимальное проявление заботы и внимания. Это не просто конфеты, а настоящее приключение для вкусовых рецепторов, путешествие по самым известным брендам из Европы, Азии и Америки.",
+            ideal_for:
+              "Идеально для: юбилея, Нового года, Дня святого Валентина или самого особенного повода, когда хочется удивить и порадовать по-крупному. Сделайте ваш праздник по-настоящему незабываемым. Выберите набор из 20 позиций — вершину сладкого искусства и заботы!",
+            guaranteed_items: formatProductList(productList),
+          },
+        },
+      ];
+
+      function updateCartCounter() {
+        const totalItems = cartItems.reduce(
+          (sum, item) => sum + item.quantity,
+          0
+        );
+        cartCounter.textContent = totalItems;
+      }
+
+      function renderProducts(products) {
+        productGrid.innerHTML = "";
+        products.forEach((product) => {
+          const productElement = document.createElement("div");
+          productElement.className = "product-item";
+          // Убрали data-id с родительского элемента, чтобы кликабельными были только кнопки
+          // productElement.dataset.id = product.id;
+
+          productElement.innerHTML = `
+            <div class="product-image-container">
+              <img src="${product.image}" alt="${product.name}" class="product-image">
+            </div>
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <div class="price">${product.price}₽</div>
+            <div class="button-group">
+                <button class="product-button details-button" data-id="${product.id}">Подробнее</button>
+                <button class="product-button buy-button" data-id="${product.id}">Купить</button>
+            </div>
+          `;
+          productGrid.appendChild(productElement);
+        });
+      }
+
+      // Обработка кликов по кнопкам "Подробнее" и "Купить"
+      productGrid.addEventListener("click", (event) => {
+        const target = event.target;
+        const productId = parseInt(target.dataset.id);
+        const product = boxes.find((p) => p.id === productId);
+
+        if (!product) return; // Выход, если продукт не найден
+
+        if (target.classList.contains("details-button")) {
+          // Кнопка "Подробнее"
+          showBoxModal(product);
+        } else if (target.classList.contains("buy-button")) {
+          // Кнопка "Купить"
+          addToCart(product);
+        }
+      });
+
+      // Функция для отображения модального окна
+      function showBoxModal(product) {
+        modalImage.src = product.image;
+        modalImage.alt = product.name;
+        // Используем заголовок из details, который содержит количество
+        modalName.textContent = product.details.title;
+        modalPrice.textContent = `${product.price}₽`;
+
+        // Заполнение описания
+        modalDescription.innerHTML = `
+              <p>${product.details.short_desc}</p>
+              <h4>🎁 Идеально подходит:</h4>
+              <p>${product.details.ideal_for}</p>
+              <h4>🍬 Состав набора (гарантированные позиции):</h4>
+              ${product.details.guaranteed_items}
+          `;
+
+        modalAddToCartBtn.dataset.id = product.id;
+
+        modalOverlay.classList.add("active");
+        document.body.style.overflow = "hidden"; // Блокировка прокрутки
+      }
+
+      // Закрытие модального окна
+      function closeModal() {
+        modalOverlay.classList.remove("active");
+        document.body.style.overflow = ""; // Разблокировка прокрутки
+      }
+
+      // Обработчики закрытия модального окна
+      modalCloseBtn.addEventListener("click", closeModal);
+      modalOverlay.addEventListener("click", (event) => {
+        if (event.target === modalOverlay) {
+          closeModal();
+        }
+      });
+
+      // Обработчик кнопки "Добавить в корзину" внутри модального окна
+      modalAddToCartBtn.addEventListener("click", (event) => {
+        const productId = parseInt(event.target.dataset.id);
+        const product = boxes.find((p) => p.id === productId);
+        if (product) {
+          addToCart(product);
+          // Закрыть модальное окно после добавления
+          closeModal();
+        }
+      });
+
+      function addToCart(product) {
+        const existingItem = cartItems.find((item) => item.id === product.id);
+        if (existingItem) {
+          existingItem.quantity++;
+        } else {
+          // Создаем новый объект товара с количеством
+          const productToAdd = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            quantity: 1,
+          };
+          cartItems.push(productToAdd);
+        }
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        updateCartCounter();
+      }
+
+      cartButton.addEventListener("click", () => {
+        window.location.href = "cart.html";
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        renderProducts(boxes);
+        updateCartCounter();
+
+        // --- ЛОГИКА ДЛЯ МОБИЛЬНОГО МЕНЮ (Гамбургер-меню) ---
+        const hamburger = document.getElementById("hamburger-menu");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const closeMenu = document.getElementById("close-menu");
+        const menuOverlay = document.getElementById("menu-overlay");
+
+        function toggleMenu() {
+          mobileMenu.classList.toggle("active");
+          // Убираем анимацию крестика для гамбургера, который скрыт в мобильном меню
+          // hamburger.classList.toggle("active");
+          menuOverlay.classList.toggle("active");
+
+          // Блокировка прокрутки основного контента при открытом меню
+          document.body.style.overflow = mobileMenu.classList.contains("active")
+            ? "hidden"
+            : "";
+        }
+
+        // Открытие меню по клику на гамбургер
+        hamburger.addEventListener("click", toggleMenu);
+
+        // Закрытие меню по клику на крестик
+        closeMenu.addEventListener("click", toggleMenu);
+
+        // Закрытие меню по клику на оверлей (затемненный фон)
+        menuOverlay.addEventListener("click", toggleMenu);
+
+        // Закрытие меню по клику на любой пункт меню
+        const mobileMenuItems = mobileMenu.querySelectorAll("a");
+        mobileMenuItems.forEach((item) => {
+          item.addEventListener("click", (event) => {
+            // Небольшая задержка, чтобы ссылка успела сработать
+            setTimeout(toggleMenu, 300);
+          });
+        });
+        // --- КОНЕЦ ЛОГИКИ ДЛЯ МОБИЛЬНОГО МЕНЮ ---
+      });
+    </script>
+  </body>
+</html>

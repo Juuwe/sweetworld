@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Главная - SWEET WORLD</title>
+
+    <!-- Добавьте перед подключением стилей -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+
+    <!-- Оптимизированное подключение шрифтов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600;700&display=swap');
+
+      /* --- КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ #1: УНИВЕРСАЛЬНЫЙ BOX-SIZING --- */
+      * {
+        box-sizing: border-box;
+      }
+
+      @font-face {
+  font-family: 'Poppins Fallback';
+  src: local('Arial');
+  size-adjust: 105%;
+  ascent-override: 95%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Fredoka One Fallback';
+  src: local('Arial');
+  size-adjust: 120%;
+  ascent-override: 90%;
+}
+
+      :root {
+        --color-main-pink: #ff69b4; /* Яркий розовый */
+        --color-main-blue: #00bfff; /* Глубокий голубой */
+        --color-main-yellow: #ffdd00; /* Солнечный желтый */
+        --color-text-dark: #4b0082; /* Индиго для текста */
+        --color-text-light: #fff;
+        --color-accent: #ff4500; /* Оранжево-красный акцент */
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенный стек для всех платформ */
+        --font-header: "Fredoka One", 'Comic Sans MS', 'Apple Chancery', 'Comic Neue', cursive;
+        --font-body: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      }
+
+      /* --- КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ #2: ЖЕСТКИЙ КОНТРОЛЬ ШИРИНЫ И СКРОЛЛА --- */
+      html {
+        width: 100%;
+        overflow-x: hidden;
+      }
+
+      body {
+        font-family: var(--font-body);
+        margin: 0;
+        color: var(--color-text-dark);
+        background-color: var(--color-main-pink);
+        position: relative;
+        overflow-x: hidden;
+        line-height: 1.6;
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для всех платформ */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+      /* --- КОНЕЦ КРИТИЧЕСКОГО ИСПРАВЛЕНИЯ --- */
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          var(--color-main-yellow) 0%,
+          var(--color-main-pink) 50%,
+          var(--color-main-blue) 100%
+        );
+        z-index: -1;
+        background-size: 400% 400%;
+        animation: gradient-animation 20s ease infinite;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ctext x='10' y='20' font-family='Arial' font-size='15'%3E%F0%9F%8D%AD%3C/text%3E%3Ctext x='70' y='50' font-family='Arial' font-size='15'%3E%E2%AD%90%EF%B8%8F%3C/text%3E%3Ctext x='30' y='80' font-family='Arial' font-size='15'%3E%F0%9F%8D%AC%3C/text%3E%3Ctext x='90' y='10' font-family='Arial' font-size='15'%3E%E2%AD%90%EF%B8%8F%3C/text%3E%3Ctext x='50' y='40' font-family='Arial' font-size='15'%3E%F0%9F%8D%AB%3C/text%3E%3C/g%3E%3C/svg%3E");
+        animation: confetti-animation 60s linear infinite;
+        z-index: -1;
+      }
+
+      @keyframes gradient-animation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes confetti-animation {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 500px 500px;
+        }
+      }
+
+      .header {
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 20px 50px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .header a {
+        text-decoration: none;
+        color: var(--color-text-dark);
+        transition: transform 0.2s ease-in-out;
+      }
+
+      .header a:hover {
+        transform: scale(1.05);
+      }
+
+      .header-brand h1 {
+        font-family: var(--font-header);
+        font-weight: 700;
+        margin: 0;
+        font-size: 48px;
+        color: var(--color-main-pink);
+        text-shadow: 2px 2px 0px var(--color-text-dark);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для заголовков */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+
+      .brand-link {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .brand-logo {
+        height: 60px;
+        width: auto;
+        transition: transform 0.2s ease-in-out;
+      }
+
+      .brand-link:hover .brand-logo {
+        transform: scale(1.05);
+      }
+
+      .header-brand h1 {
+        font-size: 40px;
+      }
+
+      /* ИСПРАВЛЕНИЕ ДЛЯ ПК: Явно скрываем все мобильные элементы по умолчанию (для ПК) */
+      .hamburger-menu, .mobile-menu, .menu-overlay {
+          display: none;
+      }
+      /* КОНЕЦ ИСПРАВЛЕНИЯ */
+
+      .nav-menu ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-menu a {
+        font-weight: 600;
+        font-size: 18px;
+        position: relative;
+        transition: color 0.3s ease;
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для навигации */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .nav-menu a::after {
+        content: "🍬";
+        position: absolute;
+        left: 50%;
+        bottom: -15px;
+        transform: translateX(-50%) scale(0);
+        transition: transform 0.3s ease-in-out;
+        font-size: 20px;
+      }
+
+      .nav-menu a:hover {
+        color: var(--color-accent);
+      }
+
+      .nav-menu a:hover::after {
+        transform: translateX(-50%) scale(1);
+      }
+
+      .content-section {
+        padding: 80px 30px;
+        text-align: center;
+        max-width: 1000px;
+        margin: 40px auto;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .content-section.dark {
+        background-color: #f8eafc; /* Новый, более светлый фон */
+        color: var(--color-text-dark); /* Темный текст */
+        border-radius: 25px;
+        margin: 50px auto;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        transform: rotate(-2deg);
+        padding: 100px 50px;
+      }
+
+      .content-section.dark p {
+        font-family: var(--font-body);
+        font-size: 18px;
+        color: var(--color-text-dark); /* Темный текст */
+      }
+
+      .content-section h2 {
+        font-family: var(--font-header);
+        font-size: 60px;
+        font-weight: 700; /* Исправлено с 900 на 700 для лучшей совместимости */
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
+        line-height: 1.2;
+        color: var(--color-text-dark);
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для заголовков */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+
+      .content-section.dark h2 {
+        color: var(--color-main-pink); /* Розовый заголовок */
+        text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+      }
+
+      .content-section p {
+        font-size: 18px;
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для текста */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* --- НОВЫЕ СТИЛИ ДЛЯ БЛОКА "КАК КУПИТЬ" --- */
+      .how-to-buy-steps {
+          display: flex;
+          justify-content: space-around;
+          margin-top: 40px;
+          gap: 20px;
+      }
+
+      .step-item {
+          flex: 1;
+          padding: 20px;
+          border-radius: 15px;
+          background-color: var(--color-main-blue);
+          color: var(--color-text-light);
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+          transition: transform 0.3s ease-in-out;
+          position: relative;
+          min-height: 150px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+      }
+
+      .step-item:hover {
+          transform: translateY(-5px);
+          background-color: var(--color-main-pink);
+      }
+
+      .step-number {
+          font-family: var(--font-header);
+          font-size: 40px;
+          color: var(--color-main-yellow);
+          margin-bottom: 10px;
+          text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+          /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для номеров шагов */
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+      }
+
+      .step-text {
+          font-weight: 600;
+          font-size: 20px;
+          line-height: 1.3;
+          /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для текста шагов */
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Соединители (стрелки) между шагами для ПК */
+      .step-item:not(:last-child)::after {
+          content: "▶";
+          position: absolute;
+          right: -25px; /* Расположение по центру между блоками */
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 30px;
+          color: var(--color-text-dark);
+          text-shadow: 1px 1px 0px var(--color-main-yellow);
+          z-index: 10;
+          display: block; /* По умолчанию отображаем */
+      }
+      /* --- КОНЕЦ НОВЫХ СТИЛЕЙ --- */
+
+      .why-us-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+        margin-top: 50px;
+        text-align: left;
+      }
+
+      .why-us-item {
+        background-color: var(--color-main-pink);
+        color: var(--color-text-light);
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .why-us-item:hover {
+        transform: translateY(-10px) scale(1.02);
+      }
+
+      .why-us-item::before {
+        content: "🍬";
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        font-size: 80px;
+        opacity: 0.1;
+        transform: rotate(20deg);
+        z-index: 1;
+      }
+
+      .item-number {
+        width: 60px;
+        height: 60px;
+        background-color: var(--color-text-light);
+        color: var(--color-main-pink);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: var(--font-header);
+        font-size: 32px;
+        font-weight: 700;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для номеров */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .item-content h3 {
+        font-family: var(--font-header);
+        font-size: 28px;
+        color: var(--color-text-light);
+        margin: 0;
+        text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для подзаголовков */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .item-content ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .item-content li {
+        position: relative;
+        padding-left: 25px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для списков */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .item-content li::before {
+        content: "⭐";
+        position: absolute;
+        left: 0;
+        font-size: 16px;
+      }
+
+      .faq-section {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 50px;
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .faq-section h2 {
+        font-family: var(--font-header);
+        font-size: 50px;
+        font-weight: 700; /* Исправлено с 900 на 700 */
+        color: var(--color-main-blue);
+        text-align: center;
+        margin-bottom: 20px;
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для FAQ заголовков */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+
+      .faq-category h3 {
+        font-family: var(--font-header);
+        font-size: 28px;
+        color: var(--color-main-pink);
+        border-left: 5px solid var(--color-main-pink);
+        padding-left: 15px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        text-align: left;
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для категорий FAQ */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .accordion {
+        background-color: var(--color-main-blue);
+        color: var(--color-text-light);
+        cursor: pointer;
+        padding: 20px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 20px;
+        font-weight: 600;
+        transition: background-color 0.4s ease, transform 0.2s ease;
+        border-radius: 15px;
+        margin-top: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для аккордеонов */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-family: var(--font-body);
+      }
+
+      .accordion:hover,
+      .accordion.active {
+        background-color: var(--color-main-pink);
+        transform: translateY(-3px);
+      }
+
+      .accordion::after {
+        content: "▶";
+        font-size: 16px;
+        transition: transform 0.4s ease;
+      }
+
+      .accordion.active::after {
+        content: "▼";
+        transform: rotate(180deg);
+      }
+
+      .panel {
+        padding: 0 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для контента панелей */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .panel p,
+      .panel ul {
+        padding: 15px 0;
+        margin: 0;
+      }
+
+      .faq-item ul {
+        margin: 10px 0 0 20px;
+        padding: 0;
+        list-style-type: none;
+        text-align: left;
+      }
+
+      .faq-item li {
+        font-size: 16px;
+        line-height: 1.5;
+        color: var(--color-text-dark);
+        margin-bottom: 5px;
+        position: relative;
+        padding-left: 20px;
+      }
+
+      .faq-item li::before {
+        content: "🍭";
+        position: absolute;
+        left: 0;
+        font-size: 16px;
+      }
+
+      .faq-contact-info {
+        text-align: center;
+        margin-top: 40px;
+        border-top: 2px dashed var(--color-main-blue);
+        padding-top: 20px;
+      }
+
+      .faq-contact-info h4 {
+        margin: 0 0 10px;
+        color: var(--color-main-pink);
+        font-size: 22px;
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для контактной информации */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* --- Стили для блока контактов (новые, как в catalog.html) --- */
+      .contacts-section {
+        padding: 60px 30px;
+        background-color: rgba(255, 255, 255, 0.9);
+        margin: 40px auto;
+        border-radius: 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        max-width: 1000px;
+        width: calc(100% - 60px);
+      }
+
+      .contacts-title {
+        font-family: var(--font-header);
+        font-size: 36px;
+        text-align: center;
+        margin: 0 0 30px 0;
+        padding-top: 0;
+        color: var(--color-text-dark);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для заголовка контактов */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+
+      .contacts-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .contacts-left {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+      }
+
+      .contact-link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: var(--color-text-dark);
+        font-weight: 600;
+        font-size: 18px;
+        transition: all 0.3s ease;
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для контактных ссылок */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .contact-link:hover {
+        color: var(--color-main-pink);
+        transform: translateX(5px);
+      }
+
+      .contact-link svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .contacts-right {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .contact-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для кнопок */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-family: var(--font-body);
+      }
+
+      .contact-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .contact-button.telegram {
+        background-color: #0088cc;
+      }
+
+      .contact-button.whatsapp {
+        background-color: #25D366;
+      }
+
+      .contact-button svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      /* --- Адаптация контактов для мобильных --- */
+      @media (max-width: 768px) {
+        .contacts-section {
+          padding: 40px 20px;
+          width: calc(100% - 40px);
+          margin: 20px auto;
+        }
+
+        .contacts-title {
+          font-size: 28px;
+          margin-bottom: 20px;
+        }
+
+        .contacts-container {
+          flex-direction: column;
+          gap: 30px;
+          text-align: center;
+        }
+
+        .contacts-left {
+          align-items: center;
+        }
+
+        .contact-link {
+          justify-content: center;
+        }
+
+        .contacts-right {
+          align-items: center;
+        }
+
+        /* --- Адаптация блока "Как купить" для мобильных --- */
+        .how-to-buy-steps {
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .step-item:not(:last-child)::after {
+            content: "▼"; /* Стрелка вниз */
+            right: 50%;
+            bottom: -20px;
+            top: auto;
+            transform: translateX(50%);
+            display: block;
+        }
+
+        .step-item {
+            min-height: 100px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .contacts-section {
+          padding: 30px 15px;
+          width: calc(100% - 30px);
+        }
+
+        .contacts-title {
+          font-size: 24px;
+        }
+
+        .contacts-right {
+          width: 100%;
+        }
+
+        .contact-button {
+          justify-content: center;
+          width: 100%;
+          max-width: 200px;
+        }
+      }
+
+      #cart-button {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: var(--color-main-pink);
+        color: #fff;
+        border: 4px solid var(--color-accent);
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        z-index: 999;
+      }
+
+      #cart-button:hover {
+        transform: scale(1.1) rotate(10deg);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      }
+
+      #cart-button svg {
+        width: 35px;
+        height: 35px;
+      }
+
+      #cart-counter {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background-color: var(--color-accent);
+        color: #fff;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        font-weight: bold;
+        animation: pulse 1.5s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(255, 69, 0, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 69, 0, 0);
+        }
+      }
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #fef4f4;
+        min-width: 180px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 2px solid var(--color-main-pink);
+        top: calc(100% + 15px);
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .dropdown-content a {
+        color: var(--color-text-dark);
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        font-weight: 500;
+        /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для выпадающего меню */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .dropdown-content a:hover {
+        background-color: var(--color-main-yellow);
+        transform: none;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      /* Адаптация для экранов до 768px */
+      @media (max-width: 768px) {
+        .why-us-list {
+          grid-template-columns: 1fr;
+        }
+
+        .header {
+          padding: 15px 20px;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .header-brand h1 {
+          font-size: 24px;
+          text-align: left;
+        }
+
+        .brand-logo {
+          height: 40px;
+        }
+
+        .brand-link {
+          flex-direction: row;
+          gap: 10px;
+        }
+
+        /* Скрываем обычное меню на мобильных */
+        .nav-menu {
+          display: none;
+        }
+
+        /* Стили для гамбургер-меню - отображаем */
+        .hamburger-menu {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          width: 30px;
+          height: 25px;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          padding: 0;
+          margin: 0;
+          margin-left: auto;
+        }
+
+        .hamburger-line {
+          width: 100%;
+          height: 3px;
+          background-color: var(--color-text-dark);
+          border-radius: 2px;
+          transition: all 0.3s ease;
+        }
+
+        /* --- КРИТИЧЕСКОЕ ИЗМЕНЕНИЕ: СТИЛИ ДЛЯ МОБИЛЬНОГО МЕНЮ (transform) --- */
+        .mobile-menu {
+          position: fixed;
+          top: 0;
+          right: 0; /* Привязываем к правому краю */
+          width: 80%;
+          height: 100vh;
+          background-color: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(10px);
+          z-index: 2000;
+          padding: 80px 30px 30px;
+          box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+          display: block;
+          overflow-y: auto;
+          overflow-x: hidden;
+
+          /* Сдвигаем на 100% его ширины за пределы экрана */
+          transform: translateX(100%);
+          transition: transform 0.3s ease-in-out;
+        }
+
+        .mobile-menu.active {
+          transform: translateX(0); /* Возвращаем на место */
+        }
+        /* --- КОНЕЦ КРИТИЧЕСКОГО ИЗМЕНЕНИЯ --- */
+
+        .mobile-menu ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+
+        .mobile-menu li {
+          margin-bottom: 20px;
+        }
+
+        .mobile-menu a {
+          display: block;
+          padding: 15px;
+          font-size: 18px;
+          font-weight: 600;
+          color: var(--color-text-dark);
+          text-decoration: none;
+          border-radius: 10px;
+          transition: all 0.3s ease;
+          background-color: rgba(255, 105, 180, 0.1);
+          /* ИСПРАВЛЕНИЕ ДЛЯ ШРИФТОВ: Улучшенное сглаживание для мобильного меню */
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+        .mobile-menu a:hover {
+          background-color: var(--color-main-pink);
+          color: white;
+          transform: translateX(10px);
+        }
+
+        .close-menu {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          background: none;
+          border: none;
+          font-size: 30px;
+          color: var(--color-text-dark);
+          cursor: pointer;
+        }
+
+        /* Оверлей для затемнения фона */
+        .menu-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          z-index: 1999;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease;
+          /* Временно отображаем, чтобы JS мог скрыть/показать */
+          display: block;
+        }
+
+        .menu-overlay.active {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        /* Анимация гамбургера при открытии */
+        .hamburger-menu.active .hamburger-line:nth-child(1) {
+          transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger-menu.active .hamburger-line:nth-child(2) {
+          opacity: 0;
+        }
+
+        .hamburger-menu.active .hamburger-line:nth-child(3) {
+          transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Адаптация контента */
+        .content-section {
+          padding: 40px 20px;
+          margin: 20px auto;
+          border-radius: 20px;
+        }
+
+        .content-section.dark {
+          padding: 60px 20px;
+          margin: 30px auto;
+          transform: rotate(0deg);
+        }
+
+        .content-section h2 {
+          font-size: 32px;
+          letter-spacing: 1px;
+        }
+
+        .content-section p {
+          font-size: 16px;
+        }
+
+        .why-us-list {
+          grid-template-columns: 1fr;
+          gap: 20px;
+          margin-top: 30px;
+        }
+
+        .why-us-item {
+          padding: 20px;
+          border-radius: 15px;
+        }
+
+        .item-number {
+          width: 50px;
+          height: 50px;
+          font-size: 24px;
+          margin-bottom: 15px;
+        }
+
+        .item-content h3 {
+          font-size: 22px;
+        }
+
+        .faq-section {
+          padding: 30px 20px;
+          margin: 30px auto;
+        }
+
+        .faq-section h2 {
+          font-size: 28px;
+        }
+
+        .faq-category h3 {
+          font-size: 22px;
+        }
+
+        .accordion {
+          padding: 15px;
+          font-size: 16px;
+        }
+
+        #cart-button {
+          width: 60px;
+          height: 60px;
+          bottom: 20px;
+          right: 20px;
+        }
+
+        #cart-button svg {
+          width: 25px;
+          height: 25px;
+        }
+
+        #cart-counter {
+          width: 20px;
+          height: 20px;
+          font-size: 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header {
+          padding: 12px 15px;
+        }
+
+        .header-brand h1 {
+          font-size: 20px;
+        }
+
+        .brand-logo {
+          height: 35px;
+        }
+
+        .hamburger-menu {
+          margin-left: auto;
+          margin-right: 0;
+        }
+
+        .content-section h2 {
+          font-size: 28px;
+        }
+
+        .content-section.dark h2 {
+          font-size: 24px;
+        }
+
+        .why-us-item {
+          padding: 15px;
+        }
+
+        .item-content h3 {
+          font-size: 20px;
+        }
+
+        .faq-section h2 {
+          font-size: 24px;
+        }
+
+        .mobile-menu {
+          width: 85%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-brand">
+        <a href="index.html" class="brand-link">
+          <img
+            src="images/logo.png"
+            alt="Логотип Sweet World"
+            class="brand-logo"
+          />
+          <h1>SWEET WORLD</h1>
+        </a>
+      </div>
+
+      <button class="hamburger-menu" id="hamburger-menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <div class="menu-overlay" id="menu-overlay"></div>
+      <div class="mobile-menu" id="mobile-menu">
+        <button class="close-menu" id="close-menu">×</button>
+        <nav>
+          <ul>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="boxes.html">Боксы</a></li>
+            <li><a href="index.html#how-to-buy">Как купить</a></li>
+            <li><a href="index.html#why-us">Почему мы</a></li>
+            <li><a href="index.html#faq">Вопросы и ответы</a></li>
+            <li><a href="index.html#contacts">Контакты</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <nav class="nav-menu">
+        <ul>
+          <li class="dropdown">
+            <a href="catalog.html" class="dropbtn">Каталог</a>
+          </li>
+          <li><a href="boxes.html">Боксы</a></li>
+          <li class="dropdown">
+            <a href="index.html" class="dropbtn">О нас</a>
+            <div class="dropdown-content">
+              <a href="index.html#how-to-buy">Как купить</a>
+              <a href="index.html#why-us">Почему мы</a>
+              <a href="index.html#faq">Вопросы и ответы</a>
+            </div>
+          </li>
+          <li><a href="index.html#contacts">Контакты</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="content-section dark" id="welcome">
+        <h2>Приветствуем в SWEET WORLD!</h2>
+        <p>
+          Мы — ваш проводник в мир уникальных и вкусных сладостей со всего
+          света. Погрузитесь в нашу коллекцию и откройте для себя новые любимые
+          вкусы, которые невозможно найти в обычных магазинах.
+        </p>
+      </section>
+
+      <section class="content-section" id="how-to-buy">
+        <h2>Как купить?</h2>
+        <p>
+          Мы сделали процесс покупки максимально простым и удобным. Следуйте
+          этим шагам, и ваши любимые сладости будут у вас совсем скоро:
+        </p>
+
+        <div class="how-to-buy-steps">
+            <div class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-text">
+                    Добавьте товары в корзину
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-text">
+                    Нажмите "Оформить заказ"
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-text">
+                    Свяжитесь с менеджером
+                </div>
+            </div>
+        </div>
+        </section>
+
+      <section class="content-section" id="why-us">
+        <h2>Почему выбирают нас?</h2>
+        <p>
+          В мире так много вкусного, что хочется попробовать всё и сразу. Но как
+          найти по-настоящему качественные сладости из-за рубежа и не
+          разочароваться? Мы знаем ответ!
+        </p>
+
+        <div class="why-us-list">
+          <div class="why-us-item">
+            <div class="item-number">1</div>
+            <div class="item-content">
+              <h3>Мир вкусов в одном месте</h3>
+              <p>
+                Мы не просто продаем шоколад и конфеты. Мы открываем для вас
+                целый мир! В нашем ассортименте — тщательно отобранные сладости
+                из Японии, Южной Кореи, США, Великобритании, Германии, Турции и
+                многих других стран. У нас вы найдете как всемирно известные
+                бренды, так и редкие локальные деликатесы, которые почти
+                невозможно встретить в обычных магазинах.
+              </p>
+            </div>
+          </div>
+
+          <div class="why-us-item">
+            <div class="item-number">2</div>
+            <div class="item-content">
+              <h3>Гарантия подлинности и свежести</h3>
+              <p>
+                Мы принципиально работаем только с официальными поставщиками и
+                дистрибьюторами. Это значит, что вы получаете 100% оригинальную
+                продукцию с актуальными сроками годности. Мы тщательно следим за
+                условиями хранения, чтобы каждый десерт дошел до вас в идеальном
+                состоянии.
+              </p>
+            </div>
+          </div>
+
+          <div class="why-us-item">
+            <div class="item-number">3</div>
+            <div class="item-content">
+              <h3>Сюрприз, который мы создаем с любовью</h3>
+              <p>
+                Наши сладкие боксы с сюрпризом — это не просто случайный набор
+                конфет. Это продуманная до мелочей композиция! Мы учитываем ваши
+                пожелания и стараемся упаковать в каждую коробку максимум
+                эмоций: от культовых хитов до новинок, о которых вы еще не
+                знаете. Это идеальный подарок для себя и близких.
+              </p>
+            </div>
+          </div>
+
+          <div class="why-us-item">
+            <div class="item-number">4</div>
+            <div class="item-content">
+              <h3>Мы сами влюблены в свое дело</h3>
+              <p>
+                Наша команда — это такие же сладкоежки, как и вы! Мы лично
+                тестируем каждый новый товар, делимся своими впечатлениями и
+                искренне рекомендуем то, что нам самим пришлось по душе. Для нас
+                важно, чтобы вы остались довольны и открыли для себя новый
+                любимый вкус.
+              </p>
+            </div>
+          </div>
+
+          <div class="why-us-item">
+            <div class="item-number">5</div>
+            <div class="item-content">
+              <h3>Удобство и забота о вас</h3>
+              <ul>
+                <li>
+                  Понятные описания: К каждому товару мы добавляем детальное
+                  описание вкуса, чтобы вы могли сделать осознанный выбор.
+                </li>
+                <li>
+                  Оперативная доставка: Мы быстро собираем и отправляем ваши
+                  заказы, чтобы вы не пришлось долго ждать свой сладкий сюрприз.
+                </li>
+                <li>
+                  Отзывчивая поддержка: Наша служба заботы о клиентах всегда
+                  готова помочь с выбором и ответить на любой вопрос.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="why-us-item">
+            <div class="item-number">6</div>
+            <div class="item-content">
+              <h3>Эксклюзивные предложения и бонусы</h3>
+              <p>
+                Мы любим радовать своих клиентов! Следите за нашими акциями,
+                сезонными скидками и специальными предложениями. А для
+                постоянных покупателей у нас всегда есть приятные бонусы и
+                подарки.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p>
+          Ведь пробовать новое — это всегда маленькое приключение. Позвольте
+          себе его с нами!
+        </p>
+      </section>
+
+      <section class="faq-section" id="faq">
+        <h2>Часто задаваемые вопросы (FAQ)</h2>
+        <p class="faq-intro">
+          Здесь мы собрали ответы на самые популярные вопросы. Если не нашли то,
+          что искали, — просто напишите или позвоните нам, мы с радостью
+          поможем!
+        </p>
+
+        <div class="faq-category">
+          <h3>О Заказах и Доставке</h3>
+
+          <button class="accordion">Как сделать заказ?</button>
+          <div class="panel">
+            <p>
+              Добавьте понравившиеся товары в корзину, затем нажминте кнопку оформить заказ и свяжитесь с нами удобным вам способом, сообщение автоматически сгенерируется, останется только его отправить.
+            </p>
+          </div>
+
+          <button class="accordion">
+            Какие способы доставки у вас есть?
+          </button>
+          <div class="panel">
+            <p>Мы предлагаем несколько удобных вариантов:</p>
+            <ul>
+              <li>
+                Курьерская доставка по г. Домодедово (в день заказа или на следующий
+                день).
+              </li>
+              <li>
+                Доставка по России через Яндекс маркет, СДЭК, Boxberry и Почту
+                России.
+              </li>
+            </ul>
+          </div>
+
+          <button class="accordion">Как долго ждать доставку?</button>
+          <div class="panel">
+            <p>Сроки зависят от вашего местоположения:</p>
+            <ul>
+              <li>По г. Домодедово: в день заказа или через один день.</li>
+              <li>
+                По России: от 2 до 14 дней в зависимости от выбранной
+                транспортной компании и удаленности региона. Точные сроки и
+                стоимость доставки рассчитываются автоматически при оформлении
+                заказа.
+              </li>
+            </ul>
+          </div>
+
+          <button class="accordion">
+            Можно ли отменить или изменить заказ?
+          </button>
+          <div class="panel">
+            <p>
+              Да, конечно! Позвоните нам или напишите менеджеру как
+              можно скорее. Если заказ еще не собран и не передан курьеру, мы
+              внесём изменения или отменим его.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-category">
+          <h3>О Сладких Боксах (коробка с сюрпризом)</h3>
+
+          <button class="accordion">
+            Что такое «бокс с сюрпризом» и как он устроен?
+          </button>
+          <div class="panel">
+            <p>
+              Это тщательно подобранная нами коллекция различных зарубежных
+              сладостей в одной красивой коробке. Вы выбираете размер (например,
+              мини на 7 предметов, средний на 12 или большой на 20), а мы
+              наполняем его разнообразными вкусняшками, включая как популярные,
+              так и редкие позиции. Состав каждого бокса уникален!
+            </p>
+          </div>
+
+          <button class="accordion">
+            Можно ли выбрать конкретные сладости в бокс?
+          </button>
+          <div class="panel">
+            <p>
+              Бокс с сюрпризом — это всегда интрига и новые открытия! Поэтому мы
+              не принимаем пожелания по конкретным позициям. Однако вы можете
+              указать свои предпочтения или ограничения (например, «без соленой
+              карамели», «больше шоколада», «только из Японии» или «без
+              сахара»). Мы обязательно учтем это при сборе!
+            </p>
+          </div>
+
+          <button class="accordion">
+            А если в боксе попадется то, что я не люблю или у меня аллергия?
+          </button>
+          <div class="panel">
+            <p>
+              Мы очень серьезно относимся к аллергиям! Обязательно укажите в
+              комментарии к заказу продукты, которые вам противопоказаны
+              (например, «аллергия на орехи» или «непереносимость лактозы»), и
+              мы исключим их из вашего бокса. По поводу вкусовых предпочтений
+              (не люблю кокос) — также укажите это, и мы постараемся подобрать
+              сладости без него.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-category">
+          <h3>О Товарах и Качестве</h3>
+
+          <button class="accordion">
+            Откуда вы привозите сладости?
+          </button>
+          <div class="panel">
+            <p>
+              Мы работаем с проверенными поставщиками и официальными
+              дистрибьюторами со всего мира. Наши товары поступают напрямую из
+              стран-производителей (США, Великобритания, Германия, Япония, Южная
+              Корея, Турция и др.), что гарантирует их подлинность и свежесть.
+            </p>
+          </p>
+          </div>
+
+          <button class="accordion">Как вы храните продукты?</button>
+          <div class="panel">
+            <p>
+              Все наши сладости хранятся на современном складе с соблюдением
+              всех необходимых норм: поддерживается оптимальная температура и
+              влажность, чтобы шоколад и другие десерты не испортились и дошли
+              до вас в идеальном виде.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-category">
+          <h3>Об Оплате и Возврате</h3>
+
+          <button class="accordion">Как можно оплатить заказ?</button>
+          <div class="panel">
+            <p>Доступны все популярные способы:</p>
+            <ul>
+              <li>Наличными курьеру или при самовывозе.</li>
+              <li>Через интернет-банк (СберБанк Онлайн, Тинькофф и др.).</li>
+            </ul>
+          </div>
+
+          <button class="accordion">
+            Что делать, если товар не понравился? Можно ли его вернуть?
+          </button>
+          <div class="panel">
+            <p>
+              Согласно законодательству РФ, продукты надлежащего качества
+              возврату и обмену не подлежат. Но мы уверены в нашем ассортименте!
+              Если вы остались недовольны заказом по какой-либо причине,
+              пожалуйста, сразу сообщите нам. Мы всегда готовы выслушать и найти
+              решение, которое вернет вам уверенность в нас (например, предложим
+              скидку на следующий заказ).
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-contact-info">
+          <h4>Остались вопросы?</h4>
+          <p>
+            Напишите нам, и мы с радостью на них ответим! Ваша сладкая почта
+            всегда на связи! ✨
+          </p>
+        </div>
+      </section>
+
+      <section class="contacts-section" id="contacts">
+        <h3 class="contacts-title">Контакты</h3>
+        <div class="contacts-container">
+          <div class="contacts-left">
+            <a href="mailto:swtwrld@yandex.ru" class="contact-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              swtwrld@yandex.ru
+            </a>
+            <a href="tel:+79939032818" class="contact-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              +7 (993) 903-28-18
+            </a>
+          </div>
+          <div class="contacts-right">
+            <a href="https://t.me/SwWrld" class="contact-button telegram" target="_blank">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.14.141-.259.259-.374.261l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.136-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
+              </svg>
+              Telegram
+            </a>
+            <a href="https://wa.me/message/W76VJZTDSOLXM1" class="contact-button whatsapp" target="_blank">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.017 2.047c-5.511 0-9.98 4.468-9.98 9.98 0 1.768.468 3.475 1.348 4.96l-1.348 4.96 5.1-1.3c1.5.8 3.2 1.3 5 1.3 5.5 0 10-4.5 10-10s-4.5-10-10-10zm-5.5 15.5l.4-.2-1.1-2.9-.2-.4c-1-1.5-1-3.3 0-4.8.5-.8 1.2-1.4 2.1-1.8.8-.4 1.7-.5 2.6-.3.9.2 1.7.7 2.3 1.4.6.7.9 1.6.9 2.5 0 .9-.3 1.8-.9 2.5-.6.7-1.4 1.2-2.3 1.4-.9.2-1.8.1-2.6-.3-.9-.4-1.6-1-2.1-1.8zm11.5 0l.4-.2-1.1-2.9-.2-.4c-1-1.5-1-3.3 0-4.8.5-.8 1.2-1.4 2.1-1.8.8-.4 1.7-.5 2.6-.3.9.2 1.7.7 2.3 1.4.6.7.9 1.6.9 2.5 0 .9-.3 1.8-.9 2.5-.6.7-1.4 1.2-2.3 1.4-.9.2-1.8.1-2.6-.3-.9-.4-1.6-1-2.1-1.8z"/>
+              </svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <button id="cart-button">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path
+          d="M1 1h4l2.68 13.39a2 2 0 0 0 1.95 1.61h9.74a2 2 0 0 0 1.95-1.61L23 6H6"
+        ></path>
+      </svg>
+      <span id="cart-counter">0</span>
+    </button>
+
+    <script>
+      let cartCounter = document.getElementById("cart-counter");
+      let cartButton = document.getElementById("cart-button");
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      updateCartCounter();
+
+      cartButton.addEventListener("click", () => {
+        window.location.href = "cart.html";
+      });
+
+      function updateCartCounter() {
+        let totalItems = cartItems.reduce(
+          (sum, item) => sum + item.quantity,
+          0
+        );
+        cartCounter.textContent = totalItems;
+      }
+
+      // Логика для аккордеона FAQ
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      }
+
+      // Логика для мобильного меню (Гамбургер-меню)
+      const hamburger = document.getElementById('hamburger-menu');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const closeMenu = document.getElementById('close-menu');
+      const menuOverlay = document.getElementById('menu-overlay');
+
+      function toggleMenu() {
+        mobileMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+        // Блокировка прокрутки основного контента при открытом меню
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+      }
+
+      // Открытие меню по клику на гамбургер
+      hamburger.addEventListener('click', toggleMenu);
+
+      // Закрытие меню по клику на крестик
+      closeMenu.addEventListener('click', toggleMenu);
+
+      // Закрытие меню по клику на оверлей (затемненный фон)
+      menuOverlay.addEventListener('click', toggleMenu);
+
+      // Закрытие меню по клику на любой пункт меню
+      const mobileMenuItems = mobileMenu.querySelectorAll('a');
+      mobileMenuItems.forEach(item => {
+        item.addEventListener('click', (event) => {
+          setTimeout(toggleMenu, 300);
+        });
+      });
+    </script>
+  </body>
+</html>
